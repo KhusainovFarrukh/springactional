@@ -1,0 +1,17 @@
+server:
+  port: 7077
+
+spring:
+  application:
+    name: springactional
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springactional?currentSchema=modifying_entity
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
