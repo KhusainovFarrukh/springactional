@@ -23,9 +23,7 @@ public class TeacherServiceImpl implements TeacherService {
 
   @Override
   public TeacherResponseDto getTeacher(Long id) {
-    return teacherRepository.findById(id)
-        .map(teacherMapper::toResponseDto)
-        .orElseThrow(() -> new RuntimeException("teacher.not_found"));
+    return teacherMapper.toResponseDto(findTeacher(id));
   }
 
   @Override
@@ -33,6 +31,12 @@ public class TeacherServiceImpl implements TeacherService {
     teacherValidator.beforeCreate(requestDto);
     var student = teacherMapper.toTeacher(requestDto);
     teacherRepository.save(student);
+  }
+
+  @Override
+  public Teacher findTeacher(Long id) {
+    return teacherRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("teacher.not_found"));
   }
 
 }

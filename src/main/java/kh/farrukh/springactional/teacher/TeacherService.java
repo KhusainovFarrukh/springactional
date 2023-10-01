@@ -13,4 +13,6 @@ public interface TeacherService {
 
   void createTeacher(TeacherCreateRequestDto requestDto);
 
+  Teacher findTeacher(Long id);
+
 }
