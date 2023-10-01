@@ -3,6 +3,7 @@ package kh.farrukh.springactional.student;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import kh.farrukh.springactional.student.dto.StudentCreateRequestDto;
+import kh.farrukh.springactional.student.dto.StudentExamResponseDto;
 import kh.farrukh.springactional.student.dto.StudentResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
@@ -45,6 +46,13 @@ public class StudentController {
   ) {
     studentService.createStudent(requestDto);
     return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  @PostMapping("{id}/examine")
+  public ResponseEntity<StudentExamResponseDto> examineStudent(
+      @PathVariable Long id
+  ) {
+    return ResponseEntity.ok(studentService.examineStudent(id));
   }
 
 }
