@@ -41,7 +41,8 @@ public class TeacherServiceImpl implements TeacherService {
   }
 
   @Override
-  public void changeBonusAccordingToExamResult(Teacher teacher, Long result) {
+  public void changeBonusAccordingToExamResult(Long id, Long result) {
+    var teacher = findTeacher(id);
     //if teacher doesn't have bonus, but exam results are good, add bonus
     if (Boolean.FALSE.equals(teacher.getHasBonus()) && result >= MINIMUM_RESULT_FOR_BONUS) {
       teacher.setHasBonus(true);

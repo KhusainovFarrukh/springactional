@@ -18,6 +18,6 @@ public interface TeacherService {
 
   Teacher findTeacher(Long id);
 
-  void changeBonusAccordingToExamResult(Teacher teacher, Long result);
+  void changeBonusAccordingToExamResult(Long id, Long result);
 
 }
