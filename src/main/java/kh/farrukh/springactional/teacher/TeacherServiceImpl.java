@@ -40,4 +40,17 @@ public class TeacherServiceImpl implements TeacherService {
         .orElseThrow(() -> new RuntimeException("teacher.not_found"));
   }
 
+  @Override
+  public void changeBonusAccordingToExamResult(Teacher teacher, Long result) {
+    //if teacher doesn't have bonus, but exam results are good, add bonus
+    if (Boolean.FALSE.equals(teacher.getHasBonus()) && result >= MINIMUM_RESULT_FOR_BONUS) {
+      teacher.setHasBonus(true);
+    }
+
+    //if teacher already has bonus, but exam results are bad, remove bonus
+    if (Boolean.TRUE.equals(teacher.getHasBonus()) && result < MINIMUM_RESULT_FOR_BONUS) {
+      teacher.setHasBonus(false);
+    }
+  }
+
 }

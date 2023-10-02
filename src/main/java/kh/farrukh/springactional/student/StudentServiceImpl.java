@@ -55,6 +55,7 @@ public class StudentServiceImpl implements StudentService {
     var result = getRandomResult();
 
     student.setLastResult(result);
+    teacherService.changeBonusAccordingToExamResult(student.getTeacher(), result);
     studentRepository.save(student);
 
     return new StudentExamResponseDto(student.getName(), result);
