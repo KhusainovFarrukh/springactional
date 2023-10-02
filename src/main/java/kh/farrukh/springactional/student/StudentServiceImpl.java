@@ -2,6 +2,7 @@ package kh.farrukh.springactional.student;
 
 import java.util.Random;
 import kh.farrukh.springactional.examlog.ExamLog;
+import kh.farrukh.springactional.examlog.ExamLogRepository;
 import kh.farrukh.springactional.student.dto.StudentCreateRequestDto;
 import kh.farrukh.springactional.student.dto.StudentExamResponseDto;
 import kh.farrukh.springactional.student.dto.StudentResponseDto;
@@ -21,6 +22,7 @@ public class StudentServiceImpl implements StudentService {
   private final StudentValidator studentValidator;
 
   private final TeacherService teacherService;
+  private final ExamLogRepository examLogRepository;
   private final Random random = new Random();
 
   private static final Long EXAM_MAX_RESULT = 100L;
@@ -58,7 +60,7 @@ public class StudentServiceImpl implements StudentService {
     var result = getRandomResult();
 
     student.setLastResult(result);
-    new ExamLog(student.getName(), student.getTeacher().getName(), result);
+    examLogRepository.save(new ExamLog(student.getName(), student.getTeacher().getName(), result));
     teacherService.changeBonusAccordingToExamResult(student.getTeacher().getId(), result);
 
     return new StudentExamResponseDto(student.getName(), result);
