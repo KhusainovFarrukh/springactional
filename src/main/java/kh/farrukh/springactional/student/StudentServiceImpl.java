@@ -1,6 +1,8 @@
 package kh.farrukh.springactional.student;
 
+import java.util.Random;
 import kh.farrukh.springactional.student.dto.StudentCreateRequestDto;
+import kh.farrukh.springactional.student.dto.StudentExamResponseDto;
 import kh.farrukh.springactional.student.dto.StudentResponseDto;
 import kh.farrukh.springactional.teacher.TeacherService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,9 @@ public class StudentServiceImpl implements StudentService {
   private final StudentValidator studentValidator;
 
   private final TeacherService teacherService;
+  private final Random random = new Random();
+
+  private static final Long EXAM_MAX_RESULT = 100L;
 
   @Override
   public Page<StudentResponseDto> getStudents(Pageable pageable) {
@@ -26,9 +31,7 @@ public class StudentServiceImpl implements StudentService {
 
   @Override
   public StudentResponseDto getStudent(Long id) {
-    return studentRepository.findById(id)
-        .map(studentMapper::toResponseDto)
-        .orElseThrow(() -> new RuntimeException("student.not_found"));
+    return studentMapper.toResponseDto(findStudent(id));
   }
 
   @Override
@@ -37,6 +40,28 @@ public class StudentServiceImpl implements StudentService {
     var student = studentMapper.toStudent(requestDto);
     student.setTeacher(teacherService.findTeacher(requestDto.getTeacherId()));
     studentRepository.save(student);
+  }
+
+  @Override
+  public Student findStudent(Long id) {
+    return studentRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("student.not_found"));
+  }
+
+  @Override
+  public StudentExamResponseDto examineStudent(Long id) {
+    var student = findStudent(id);
+
+    var result = getRandomResult();
+
+    student.setLastResult(result);
+    studentRepository.save(student);
+
+    return new StudentExamResponseDto(student.getName(), result);
+  }
+
+  private Long getRandomResult() {
+    return random.nextLong(EXAM_MAX_RESULT);
   }
 
 }
