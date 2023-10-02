@@ -10,11 +10,4 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
   boolean existsByNameIgnoreCase(String name);
 
-  @Modifying
-  @Query("""
-      update Student student
-      set student.lastResult = :#{#result}
-      where student.id = :#{#id}
-      """)
-  void updateLastResult(Long id, Long result);
 }
