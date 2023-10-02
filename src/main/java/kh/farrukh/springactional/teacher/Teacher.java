@@ -34,4 +34,7 @@ public class Teacher {
   @Column(name = "salary", nullable = false)
   private Long salary;
 
+  @Column(name = "has_bonus", nullable = false)
+  private Boolean hasBonus;
+
 }

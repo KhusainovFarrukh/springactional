@@ -13,4 +13,6 @@ public class TeacherResponseDto {
 
   private Long salary;
 
+  private Long actualSalary;
+
 }

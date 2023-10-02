@@ -30,6 +30,7 @@ public class TeacherServiceImpl implements TeacherService {
   public void createTeacher(TeacherCreateRequestDto requestDto) {
     teacherValidator.beforeCreate(requestDto);
     var teacher = teacherMapper.toTeacher(requestDto);
+    teacher.setHasBonus(false);
     teacherRepository.save(teacher);
   }
 
