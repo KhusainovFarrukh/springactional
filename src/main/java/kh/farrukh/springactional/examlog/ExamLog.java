@@ -37,6 +37,7 @@ public class ExamLog {
   @Column(name = "result", nullable = false)
   private Long result;
 
+  @CreatedDate
   @Column(name = "examined_at", nullable = false)
   private LocalDateTime examinedAt;
 
