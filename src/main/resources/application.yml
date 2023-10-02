@@ -1,11 +1,11 @@
 server:
-  port: 7077
+  port: 7078
 
 spring:
   application:
     name: springactional
   datasource:
-    url: jdbc:postgresql://localhost:5432/springactional?currentSchema=modifying_entity
+    url: jdbc:postgresql://localhost:5432/springactional?currentSchema=transactional
     username: postgres
     password: postgres
   jpa:
