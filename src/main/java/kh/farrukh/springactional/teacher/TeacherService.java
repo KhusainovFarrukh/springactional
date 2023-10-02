@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface TeacherService {
 
+  Double BONUS_SALARY_MULTIPLIER = 1.1;
+
   Page<TeacherResponseDto> getTeachers(Pageable pageable);
 
   TeacherResponseDto getTeacher(Long id);
