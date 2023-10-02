@@ -29,8 +29,8 @@ public class TeacherServiceImpl implements TeacherService {
   @Override
   public void createTeacher(TeacherCreateRequestDto requestDto) {
     teacherValidator.beforeCreate(requestDto);
-    var student = teacherMapper.toTeacher(requestDto);
-    teacherRepository.save(student);
+    var teacher = teacherMapper.toTeacher(requestDto);
+    teacherRepository.save(teacher);
   }
 
   @Override
