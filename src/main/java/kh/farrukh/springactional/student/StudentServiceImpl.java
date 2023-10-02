@@ -51,7 +51,12 @@ public class StudentServiceImpl implements StudentService {
   @Override
   public StudentExamResponseDto examineStudent(Long id) {
     var student = findStudent(id);
+
     var result = getRandomResult();
+
+    student.setLastResult(result);
+    studentRepository.save(student);
+
     return new StudentExamResponseDto(student.getName(), result);
   }
 

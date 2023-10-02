@@ -14,6 +14,8 @@ public class StudentResponseDto {
 
   private String email;
 
+  private Long lastResult;
+
   private TeacherResponseDto teacher;
 
 }

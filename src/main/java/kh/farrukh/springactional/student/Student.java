@@ -38,6 +38,9 @@ public class Student {
   @Column(name = "email", length = 30)
   private String email;
 
+  @Column(name = "last_result")
+  private Long lastResult;
+
   @ManyToOne(optional = false)
   @JoinColumn(name = "teacher_id", nullable = false)
   private Teacher teacher;
