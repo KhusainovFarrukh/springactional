@@ -56,7 +56,6 @@ public class StudentServiceImpl implements StudentService {
 
     student.setLastResult(result);
     teacherService.changeBonusAccordingToExamResult(student.getTeacher().getId(), result);
-    studentRepository.save(student);
 
     return new StudentExamResponseDto(student.getName(), result);
   }
