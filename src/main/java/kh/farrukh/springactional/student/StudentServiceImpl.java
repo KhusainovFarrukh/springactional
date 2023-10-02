@@ -53,6 +53,7 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
+  @Transactional
   public StudentExamResponseDto examineStudent(Long id) {
     var student = findStudent(id);
 
